@@ -47,5 +47,16 @@ public class ThinkingTest {
         }
 //      C. Add new contact
         AddContact addContact = contactPage.addNewContactClick();
-    }
+        addContact.addFirstName(Constants.addContactFirstName);
+        addContact.addLastName(Constants.addContactLastName);
+        addContact.addEmail(Constants.addContactEmail);
+        addContact.addDateOfBirth(Constants.addContactBirthDate);
+        addContact.addStreetAddress1(Constants.addContactStreet1);
+        addContact.addStreetAddress2(Constants.addContactStreet2);
+        addContact.addCity(Constants.addContactCity);
+        addContact.addPostalCode(Constants.addContactPostalCode);
+        addContact.addCountry(Constants.addContactCountry);
+        addContact.addState(Constants.addContactState);
+        addContact.addSubmit();
+        }
 }

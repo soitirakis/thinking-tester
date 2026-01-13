@@ -37,7 +37,7 @@ public class LoginPage extends BasePage {
         return new ContactPage(driver);
     }
     public boolean isLoginErrorDisplayed() {
-        WaitUtils.visibilityOfElementLocated(errorMessageBy);
+        //WaitUtils.visibilityOfElementLocated(errorMessageBy);
         return errorMessage.isDisplayed();
     }
 
