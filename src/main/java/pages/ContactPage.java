@@ -8,8 +8,8 @@ import utils.WaitUtils;
 
 public class ContactPage extends BasePage {
 
-    private final String userName = "FirstName1";
-    private final String valueToCheck = "City";
+    private final String userName = "catalin";
+    private final String valueToCheck = "romania";
 
     @FindBy(xpath = "//button[@id='add-contact']")
     private WebElement addNewContactButton;
