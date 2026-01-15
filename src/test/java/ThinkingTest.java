@@ -1,4 +1,5 @@
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
@@ -58,5 +59,8 @@ public class ThinkingTest {
         addContact.addCountry(Constants.addContactCountry);
         addContact.addState(Constants.addContactState);
         addContact.addSubmit();
+
+        Assert.assertTrue(contactPage.isNewNameDisplayed());
+        Assert.assertTrue(contactPage.isValueDisplayed());
         }
 }

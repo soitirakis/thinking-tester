@@ -11,8 +11,8 @@ public class Constants {
     public static String loginError = "Incorrect username or password";
 
 //  Add contact info
-    public static String addContactFirstName = "FirstName";
-    public static String addContactLastName = "LastName";
+    public static String addContactFirstName = "FirstName1";
+    public static String addContactLastName = "LastName2";
     public static String addContactBirthDate = "2025-01-14";
     public static String addContactPhone = "07123456789";
     public static String addContactEmail = "example@test.com";
