@@ -11,6 +11,9 @@ public class ContactPage extends BasePage {
     private final String userName = "catalin";
     private final String valueToCheck = "romania";
 
+    @FindBy(xpath = "//h1[contains(.,'Contact List')]")
+    private WebElement contactListHeading;
+
     @FindBy(xpath = "//button[@id='add-contact']")
     private WebElement addNewContactButton;
 
@@ -23,6 +26,7 @@ public class ContactPage extends BasePage {
     By addNewContactBy = By.xpath("//button[@id='add-contact']");
     By nameAddedBy = By.xpath("//tr/td[contains(.,'"+userName+"')]");
     By valueToCheckBy = By.xpath("//tr/td[contains(.,'"+userName+"')]/following-sibling::td[contains(.,'"+valueToCheck+"')]");
+    By contactListHeadingBy = By.xpath("//h1[contains(.,'Contact List')]");
 
     public ContactPage(WebDriver driver) {
         super(driver);
@@ -42,6 +46,11 @@ public class ContactPage extends BasePage {
     public boolean isValueDisplayed() {
         WaitUtils.visibilityOfElementLocated(valueToCheckBy);
         return elementToCheck.isDisplayed();
+    }
+
+    public boolean contactListHeadingIsDisplayed() {
+        WaitUtils.visibilityOfElementLocated(contactListHeadingBy);
+        return contactListHeading.isDisplayed();
     }
 
 

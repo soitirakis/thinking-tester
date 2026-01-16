@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
@@ -16,37 +17,61 @@ public class ThinkingTest {
         driver.manage().window().maximize();
     }
 
-   /* @AfterMethod
+    @AfterMethod
     public void tearDown(){
         DriverFactory.closeDriver();
-    }*/
+    }
+
+    private ContactPage login() {
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.addLoginEmail(Constants.loginEmail);
+        loginPage.addLoginPassword(Constants.loginPassword);
+
+        return loginPage.clickLoginButton();
+    }
 
     @Test
     public void thinkingPOMTest() {
 //      A. Navigate to homePage
         HomePage homePage = new HomePage(driver);
         homePage.open();
-//      B. Login if user already exist
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.addLoginEmail(Constants.email);
-        loginPage.addLoginPassword(Constants.password);
-        ContactPage contactPage = null;
-        contactPage = loginPage.clickLoginButton();
 
-        if (loginPage.isLoginErrorDisplayed()) {
-            System.out.println("Login Error");
-//      B. SignUp using predefined user
-            SignUp singUp = new SignUp(driver);
-            SignUpPage signUpPage = singUp.clickSignUpButton();
-            signUpPage.addFirstName(Constants.firstName);
-            signUpPage.addLastName(Constants.lastName);
-            signUpPage.addEmail(Constants.email);
-            signUpPage.addPassword(Constants.password);
-            contactPage = signUpPage.clickSubmitButton();
-        } else {
-            System.out.println("Login successful");
-        }
-//      C. Add new contact
+        Assert.assertTrue(homePage.isHeadingDisplayed(), "Page not loaded");
+
+    }
+    @Test
+    public void loginTest() {
+//      B. Login
+        ContactPage contactPage = login();
+        Assert.assertTrue(contactPage.contactListHeadingIsDisplayed(), "Page not loaded");
+    }
+
+    @Test
+    public void signUpTest() {
+//      C. SignUp using predefined user
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+
+        SignUp singUp = new SignUp(driver);
+        SignUpPage signUpPage = singUp.clickSignUpButton();
+
+        signUpPage.addFirstName(Constants.firstName);
+        signUpPage.addLastName(Constants.lastName);
+        signUpPage.addEmail(Constants.newUserEmail);
+        signUpPage.addPassword(Constants.newUserPassword);
+        ContactPage contactPage = signUpPage.clickSubmitButton();;
+
+        Assert.assertTrue(contactPage.contactListHeadingIsDisplayed(), "Page not loaded");
+    }
+
+    @Test
+    public void addContactTest() {
+//      D. Add new contact
+        ContactPage contactPage = login();
+
         AddContact addContact = contactPage.addNewContactClick();
         addContact.addFirstName(Constants.addContactFirstName);
         addContact.addLastName(Constants.addContactLastName);
@@ -60,7 +85,7 @@ public class ThinkingTest {
         addContact.addState(Constants.addContactState);
         addContact.addSubmit();
 
-        Assert.assertTrue(contactPage.isNewNameDisplayed());
-        Assert.assertTrue(contactPage.isValueDisplayed());
-        }
+        Assert.assertTrue(contactPage.isNewNameDisplayed(), "New name is not displayed");
+        Assert.assertTrue(contactPage.isValueDisplayed(), "Value is not displayed");
+    }
 }
