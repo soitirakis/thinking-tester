@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.Constants;
-import utils.DriverFactory;
+import driver.DriverFactory;
 
 public class ThinkingTest {
 
